@@ -812,7 +812,7 @@ fig.update_layout(height=1100, width=2000) #xaxis_tickfont_size=30
 
 st.subheader("PRE-MARKET - MACRO + ADRS | " + data_hoje)
 
-st.subheader("Vilson Dias")
+st.subheader("Desenvolvido por Vilson Dias")
 
 
 for i in fig['layout']['annotations']:
