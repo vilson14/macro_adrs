@@ -105,7 +105,7 @@ vix_var_05 = vix_var_04.replace('%', '')
 vix_var_06 = vix_var_05.replace(',', '.')
 vix_var_07 = float(vix_var_06)
 
-
+time.sleep(3)
 
 #OURO-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/commodities/gold'
@@ -130,7 +130,7 @@ ouro_var_05 = ouro_var_04.replace('%', '')
 ouro_var_06 = ouro_var_05.replace(',', '.')
 ouro_var_07 = float(ouro_var_06)
 
-
+time.sleep(3)
 
 #BRENT-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/commodities/brent-oil'
@@ -179,7 +179,7 @@ sp500_var_07 = float(sp500_var_06)
 
 
 
-time.sleep(2)
+time.sleep(3)
 
 
 
@@ -247,7 +247,7 @@ minerio_cme_var_06 = minerio_cme_var_05.replace(',', '.')
 minerio_cme_var_07 = float(minerio_cme_var_06)
 
 
-time.sleep(2)
+time.sleep(3)
 #EWZ-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/etfs/ishares-brazil-index'
 req = Request(url, headers=head)
@@ -308,7 +308,7 @@ if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
 
 
 
-time.sleep(2)
+time.sleep(3)
 #VALE-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/equities/vale-s.a.--americ'
 req = Request(url, headers=head)
@@ -368,7 +368,7 @@ if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
 
 
 
-time.sleep(2)
+time.sleep(3)
 #PETRO-------------------------------------------------------------------------------------------------------------------------------------
 
 url = 'https://br.investing.com/equities/petroleo-bras'
@@ -425,7 +425,7 @@ if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
 
 
 
-time.sleep(2)
+time.sleep(3)
 #ITAU-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/equities/itau-unibanco-holding-sa-adr'
 req = Request(url, headers=head)
