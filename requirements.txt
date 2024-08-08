@@ -1,0 +1,14 @@
+make_subplots
+plotly.subplots
+plotly.graph_objects
+plotly
+pandas
+numpy
+time
+datetime
+date
+openpyxl
+lxml
+PIL
+urllib
+bs4
