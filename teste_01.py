@@ -19,6 +19,9 @@ from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 
 
+import urllib.request
+
+
 # from selenium import webdriver
 # from selenium.webdriver.chrome.options import Options
 # from selenium.webdriver.chrome.service import Service
@@ -86,9 +89,14 @@ head = {
 
 #VIX-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/indices/volatility-s-p-500'
-req = Request(url, headers=head)
-html1 = urlopen(req)
-html2 = html1.read()
+# req = Request(url, headers=head)
+# html1 = urlopen(req)
+# html2 = html1.read()
+# soup = BeautifulSoup(html2, "html.parser")
+
+request = urllib.request.Request (url, headers=head)
+f = urllib.request.urlopen (request)
+html2 = f.read()
 soup = BeautifulSoup(html2, "html.parser")
 
 vix_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
@@ -109,9 +117,14 @@ time.sleep(3)
 
 #OURO-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/commodities/gold'
-req = Request(url, headers=head)
-html1 = urlopen(req)
-html2 = html1.read()
+# req = Request(url, headers=head)
+# html1 = urlopen(req)
+# html2 = html1.read()
+# soup = BeautifulSoup(html2, "html.parser")
+
+request = urllib.request.Request (url, headers=head)
+f = urllib.request.urlopen (request)
+html2 = f.read()
 soup = BeautifulSoup(html2, "html.parser")
 
 ouro_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
@@ -134,9 +147,14 @@ time.sleep(3)
 
 #BRENT-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/commodities/brent-oil'
-req = Request(url, headers=head)
-html1 = urlopen(req)
-html2 = html1.read()
+# req = Request(url, headers=head)
+# html1 = urlopen(req)
+# html2 = html1.read()
+# soup = BeautifulSoup(html2, "html.parser")
+
+request = urllib.request.Request (url, headers=head)
+f = urllib.request.urlopen (request)
+html2 = f.read()
 soup = BeautifulSoup(html2, "html.parser")
 
 brent_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
@@ -156,9 +174,14 @@ brent_var_07 = float(brent_var_06)
 
 #SP500-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/indices/us-spx-500-futures'
-req = Request(url, headers=head)
-html1 = urlopen(req)
-html2 = html1.read()
+# req = Request(url, headers=head)
+# html1 = urlopen(req)
+# html2 = html1.read()
+# soup = BeautifulSoup(html2, "html.parser")
+
+request = urllib.request.Request (url, headers=head)
+f = urllib.request.urlopen (request)
+html2 = f.read()
 soup = BeautifulSoup(html2, "html.parser")
 
 sp500_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
@@ -186,9 +209,14 @@ time.sleep(3)
 
 #WTI-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/commodities/crude-oil'
-req = Request(url, headers=head)
-html1 = urlopen(req)
-html2 = html1.read()
+# req = Request(url, headers=head)
+# html1 = urlopen(req)
+# html2 = html1.read()
+# soup = BeautifulSoup(html2, "html.parser")
+
+request = urllib.request.Request (url, headers=head)
+f = urllib.request.urlopen (request)
+html2 = f.read()
 soup = BeautifulSoup(html2, "html.parser")
 
 wti_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
@@ -226,9 +254,14 @@ minerio_dalian_var_04 = 0
 
 #MINERIO CME-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/commodities/iron-ore-62-cfr-futures'
-req = Request(url, headers=head)
-html1 = urlopen(req)
-html2 = html1.read()
+# req = Request(url, headers=head)
+# html1 = urlopen(req)
+# html2 = html1.read()
+# soup = BeautifulSoup(html2, "html.parser")
+
+request = urllib.request.Request (url, headers=head)
+f = urllib.request.urlopen (request)
+html2 = f.read()
 soup = BeautifulSoup(html2, "html.parser")
 
 minerio_cme_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
@@ -250,9 +283,14 @@ minerio_cme_var_07 = float(minerio_cme_var_06)
 time.sleep(3)
 #EWZ-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/etfs/ishares-brazil-index'
-req = Request(url, headers=head)
-html1 = urlopen(req)
-html2 = html1.read()
+# req = Request(url, headers=head)
+# html1 = urlopen(req)
+# html2 = html1.read()
+# soup = BeautifulSoup(html2, "html.parser")
+
+request = urllib.request.Request (url, headers=head)
+f = urllib.request.urlopen (request)
+html2 = f.read()
 soup = BeautifulSoup(html2, "html.parser")
 
 ewz_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
@@ -311,9 +349,14 @@ if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
 time.sleep(3)
 #VALE-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/equities/vale-s.a.--americ'
-req = Request(url, headers=head)
-html1 = urlopen(req)
-html2 = html1.read()
+# req = Request(url, headers=head)
+# html1 = urlopen(req)
+# html2 = html1.read()
+# soup = BeautifulSoup(html2, "html.parser")
+
+request = urllib.request.Request (url, headers=head)
+f = urllib.request.urlopen (request)
+html2 = f.read()
 soup = BeautifulSoup(html2, "html.parser")
 
 vale_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
@@ -372,9 +415,14 @@ time.sleep(3)
 #PETRO-------------------------------------------------------------------------------------------------------------------------------------
 
 url = 'https://br.investing.com/equities/petroleo-bras'
-req = Request(url, headers=head)
-html1 = urlopen(req)
-html2 = html1.read()
+# req = Request(url, headers=head)
+# html1 = urlopen(req)
+# html2 = html1.read()
+# soup = BeautifulSoup(html2, "html.parser")
+
+request = urllib.request.Request (url, headers=head)
+f = urllib.request.urlopen (request)
+html2 = f.read()
 soup = BeautifulSoup(html2, "html.parser")
 
 petro_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
@@ -428,9 +476,14 @@ if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
 time.sleep(3)
 #ITAU-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/equities/itau-unibanco-holding-sa-adr'
-req = Request(url, headers=head)
-html1 = urlopen(req)
-html2 = html1.read()
+# req = Request(url, headers=head)
+# html1 = urlopen(req)
+# html2 = html1.read()
+# soup = BeautifulSoup(html2, "html.parser")
+
+request = urllib.request.Request (url, headers=head)
+f = urllib.request.urlopen (request)
+html2 = f.read()
 soup = BeautifulSoup(html2, "html.parser")
 
 itau_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
