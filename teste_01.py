@@ -308,7 +308,7 @@ if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
 
 
 
-
+time.sleep(2)
 #VALE-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/equities/vale-s.a.--americ'
 req = Request(url, headers=head)
@@ -422,7 +422,7 @@ if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
     
 
 
-
+time.sleep(2)
 #ITAU-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/equities/itau-unibanco-holding-sa-adr'
 req = Request(url, headers=head)
@@ -476,7 +476,7 @@ if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
     print (itau_leilao_08)
     
     
-
+time.sleep(2)
 #BRADESCO-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/equities/banco-bradesco-s-a-adr'
 req = Request(url, headers=head)
@@ -532,7 +532,7 @@ if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
     print (bradesco_leilao_08)
     
     
-
+time.sleep(2)
 #BRASIL-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/equities/banco-do-brasil-sa'
 req = Request(url, headers=head)
