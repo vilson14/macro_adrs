@@ -203,7 +203,7 @@ wti_var_04 = wti_var_03.replace(')', '')
 wti_var_05 = wti_var_04.replace('%', '')
 wti_var_06 = wti_var_05.replace(',', '.')
 wti_var_07 = float(wti_var_06)
-print (wti_var_07)
+
 
 
 
@@ -284,7 +284,7 @@ if soup.findAll('span', {"text-positive-main text-base/6 rtl:force-ltr"}):
     ewz_leilao_06 = ewz_leilao_05.replace('%', '')
     ewz_leilao_07 = ewz_leilao_06.replace(',', '.')
     ewz_leilao_08 = float(ewz_leilao_07)
-    print (ewz_leilao_08)
+    
     
     
 
@@ -299,7 +299,7 @@ if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
     ewz_leilao_06 = ewz_leilao_05.replace('%', '')
     ewz_leilao_07 = ewz_leilao_06.replace(',', '.')
     ewz_leilao_08 = float(ewz_leilao_07)
-    print (ewz_leilao_08)
+    
 
 
 
