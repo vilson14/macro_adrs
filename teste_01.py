@@ -152,7 +152,7 @@ data_hoje_min = (data_hoje + " - "+ hora_minutos)
 
 
 
-fig.update_layout(height=1100, width=1500, title_text="PRE-MARKET - MACRO + ADRS | " + data_hoje_min + " hs") #xaxis_tickfont_size=30
+fig.update_layout(height=1100, width=2000, title_text="PRE-MARKET - MACRO + ADRS | " + data_hoje) #xaxis_tickfont_size=30
 
 #st.subheader("PRE-MARKET - MACRO + ADRS " + vix_var_06)
 
