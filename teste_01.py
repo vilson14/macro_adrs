@@ -1,5 +1,4 @@
 
-
 from plotly.subplots import make_subplots
 import plotly.graph_objects as go
 import plotly
@@ -249,6 +248,61 @@ minerio_cme_var_07 = float(minerio_cme_var_06)
 
 
 
+#EWZ-------------------------------------------------------------------------------------------------------------------------------------
+url = 'https://br.investing.com/etfs/ishares-brazil-index'
+req = Request(url, headers=head)
+html1 = urlopen(req)
+html2 = html1.read()
+soup = BeautifulSoup(html2, "html.parser")
+
+ewz_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
+ewz_preco_02 = ewz_preco_01.getText()
+ewz_preco_03 = ewz_preco_02.replace(',', '.')
+ewz_preco_04 = float(ewz_preco_03)
+
+
+
+ewz_var_01 = soup.find('span', {"data-test": "instrument-price-change-percent"})
+ewz_var_02 = ewz_var_01.getText()
+ewz_var_03 = ewz_var_02.replace('(', '')
+ewz_var_04 = ewz_var_03.replace(')', '')
+ewz_var_05 = ewz_var_04.replace('%', '')
+ewz_var_06 = ewz_var_05.replace(',', '.')
+ewz_var_07 = float(ewz_var_06)
+
+
+
+ewz_leilao_08 = float(0)
+
+if soup.findAll('span', {"text-positive-main text-base/6 rtl:force-ltr"}):
+    #print ("OK")
+    ewz_leilao_01 = soup.findAll('span', {"text-positive-main text-base/6 rtl:force-ltr"})
+    ewz_leilao_02 = ewz_leilao_01[1]
+    ewz_leilao_03 = ewz_leilao_02.getText()
+    ewz_leilao_04 = ewz_leilao_03.replace('(', '')
+    ewz_leilao_05 = ewz_leilao_04.replace(')', '')
+    ewz_leilao_06 = ewz_leilao_05.replace('%', '')
+    ewz_leilao_07 = ewz_leilao_06.replace(',', '.')
+    ewz_leilao_08 = float(ewz_leilao_07)
+    print (ewz_leilao_08)
+    
+    
+
+
+if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
+    #print ("BUG")
+    ewz_leilao_01 = soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"})
+    ewz_leilao_02 = ewz_leilao_01[1]
+    ewz_leilao_03 = ewz_leilao_02.getText()
+    ewz_leilao_04 = ewz_leilao_03.replace('(', '')
+    ewz_leilao_05 = ewz_leilao_04.replace(')', '')
+    ewz_leilao_06 = ewz_leilao_05.replace('%', '')
+    ewz_leilao_07 = ewz_leilao_06.replace(',', '.')
+    ewz_leilao_08 = float(ewz_leilao_07)
+    print (ewz_leilao_08)
+
+
+
 
 
 
@@ -345,6 +399,19 @@ df_minerio_cme["Color"] = np.where(df_minerio_cme["Variação"]<0, 'red', 'green
 
 
 
+#EWZ-------------------------------------------------------------------------------------------------
+ativos_ewz=['Variação']
+y_var_ewz=[ewz_var_07]
+
+df_ewz = pd.DataFrame({
+     'Variação':[ewz_var_07, ewz_leilao_08], 
+     'Leilão':['Variação','Leilão']
+})
+
+df_ewz["Color"] = np.where(df_ewz["Variação"]<0, 'red', 'green')
+
+
+
 
 
 
@@ -400,6 +467,11 @@ fig.add_trace(go.Bar(x=ativos_minerio_cme, y=df_minerio_cme['Variação'], marke
 fig.add_shape(type='line', x0=-0.5, y0=0, x1=0.5, y1=0, line=dict( color='black', width=5,),row=3, col=2)
 fig.add_annotation(x=0, y=((df_minerio_cme['Variação']/2).iloc[0]),text=str (minerio_cme_preco_04),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=3, col=2)
 
+#EWZ
+fig.add_trace(go.Bar(name='Net2', x=df_ewz['Leilão'], y=df_ewz['Variação'], marker_color=df_ewz['Color'], text= [str(i1)+' %' for i1 in df_ewz['Variação']], textposition='inside', width=0.5, marker_line_color='black', marker_line_width=1),row=3, col=3 )
+fig.add_shape(type='line', x0=-0.5, y0=0, x1=1.5, y1=0, line=dict( color='black', width=5,),row=3, col=3)
+fig.add_annotation(x=0, y=((df_ewz['Variação']/2).iloc[0]),text=str (ewz_preco_04),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=3, col=3)
+
 
 
 
@@ -412,7 +484,7 @@ fig.add_annotation(x=0, y=((df_minerio_cme['Variação']/2).iloc[0]),text=str (m
 #fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(2,1)"), row=2, col=1)
 #fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,1)"), row=3, col=1)
 #fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,2)"), row=3, col=2)
-fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,2)"), row=3, col=3)
+#fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,2)"), row=3, col=3)
 
 fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(4,1)"), row=4, col=1)
 fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=4, col=2)
