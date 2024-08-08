@@ -346,64 +346,64 @@ if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
 
 
 
-time.sleep(3)
-#VALE-------------------------------------------------------------------------------------------------------------------------------------
-url = 'https://br.investing.com/equities/vale-s.a.--americ'
-# req = Request(url, headers=head)
-# html1 = urlopen(req)
-# html2 = html1.read()
+# time.sleep(3)
+# #VALE-------------------------------------------------------------------------------------------------------------------------------------
+# url = 'https://br.investing.com/equities/vale-s.a.--americ'
+# # req = Request(url, headers=head)
+# # html1 = urlopen(req)
+# # html2 = html1.read()
+# # soup = BeautifulSoup(html2, "html.parser")
+
+# request = urllib.request.Request (url, headers=head)
+# f = urllib.request.urlopen (request)
+# html2 = f.read()
 # soup = BeautifulSoup(html2, "html.parser")
 
-request = urllib.request.Request (url, headers=head)
-f = urllib.request.urlopen (request)
-html2 = f.read()
-soup = BeautifulSoup(html2, "html.parser")
-
-vale_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
-vale_preco_02 = vale_preco_01.getText()
-vale_preco_03 = vale_preco_02.replace(',', '.')
-vale_preco_04 = float(vale_preco_03)
+# vale_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
+# vale_preco_02 = vale_preco_01.getText()
+# vale_preco_03 = vale_preco_02.replace(',', '.')
+# vale_preco_04 = float(vale_preco_03)
 
 
 
-vale_var_01 = soup.find('span', {"data-test": "instrument-price-change-percent"})
-vale_var_02 = vale_var_01.getText()
-vale_var_03 = vale_var_02.replace('(', '')
-vale_var_04 = vale_var_03.replace(')', '')
-vale_var_05 = vale_var_04.replace('%', '')
-vale_var_06 = vale_var_05.replace(',', '.')
-vale_var_07 = float(vale_var_06)
+# vale_var_01 = soup.find('span', {"data-test": "instrument-price-change-percent"})
+# vale_var_02 = vale_var_01.getText()
+# vale_var_03 = vale_var_02.replace('(', '')
+# vale_var_04 = vale_var_03.replace(')', '')
+# vale_var_05 = vale_var_04.replace('%', '')
+# vale_var_06 = vale_var_05.replace(',', '.')
+# vale_var_07 = float(vale_var_06)
 
 
 
-vale_leilao_08 = float(0)
+# vale_leilao_08 = float(0)
 
 
-if soup.findAll('span', {"text-positive-main text-base/6 rtl:force-ltr"}):
-    #print ("OK")
-    vale_leilao_01 = soup.findAll('span', {"text-positive-main text-base/6 rtl:force-ltr"})
-    vale_leilao_02 = vale_leilao_01[1]
-    vale_leilao_03 = vale_leilao_02.getText()
-    vale_leilao_04 = vale_leilao_03.replace('(', '')
-    vale_leilao_05 = vale_leilao_04.replace(')', '')
-    vale_leilao_06 = vale_leilao_05.replace('%', '')
-    vale_leilao_07 = vale_leilao_06.replace(',', '.')
-    vale_leilao_08 = float(vale_leilao_07)
+# if soup.findAll('span', {"text-positive-main text-base/6 rtl:force-ltr"}):
+#     #print ("OK")
+#     vale_leilao_01 = soup.findAll('span', {"text-positive-main text-base/6 rtl:force-ltr"})
+#     vale_leilao_02 = vale_leilao_01[1]
+#     vale_leilao_03 = vale_leilao_02.getText()
+#     vale_leilao_04 = vale_leilao_03.replace('(', '')
+#     vale_leilao_05 = vale_leilao_04.replace(')', '')
+#     vale_leilao_06 = vale_leilao_05.replace('%', '')
+#     vale_leilao_07 = vale_leilao_06.replace(',', '.')
+#     vale_leilao_08 = float(vale_leilao_07)
     
     
     
 
 
-if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
-    #print ("BUG")
-    vale_leilao_01 = soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"})
-    vale_leilao_02 = vale_leilao_01[1]
-    vale_leilao_03 = vale_leilao_02.getText()
-    vale_leilao_04 = vale_leilao_03.replace('(', '')
-    vale_leilao_05 = vale_leilao_04.replace(')', '')
-    vale_leilao_06 = vale_leilao_05.replace('%', '')
-    vale_leilao_07 = vale_leilao_06.replace(',', '.')
-    vale_leilao_08 = float(vale_leilao_07)
+# if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
+#     #print ("BUG")
+#     vale_leilao_01 = soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"})
+#     vale_leilao_02 = vale_leilao_01[1]
+#     vale_leilao_03 = vale_leilao_02.getText()
+#     vale_leilao_04 = vale_leilao_03.replace('(', '')
+#     vale_leilao_05 = vale_leilao_04.replace(')', '')
+#     vale_leilao_06 = vale_leilao_05.replace('%', '')
+#     vale_leilao_07 = vale_leilao_06.replace(',', '.')
+#     vale_leilao_08 = float(vale_leilao_07)
     
 
 
@@ -638,12 +638,12 @@ df_ewz["Color"] = np.where(df_ewz["Variação"]<0, 'red', 'green')
 
 
 #VALE-------------------------------------------------------------------------------------------------
-df_vale = pd.DataFrame({
-     'Variação':[vale_var_07,vale_leilao_08], 
-     'Leilão':['Variação','Leilão']
-})
+# df_vale = pd.DataFrame({
+#      'Variação':[vale_var_07,vale_leilao_08], 
+#      'Leilão':['Variação','Leilão']
+# })
 
-df_vale["Color"] = np.where(df_vale["Variação"]<0, 'red', 'green')
+# df_vale["Color"] = np.where(df_vale["Variação"]<0, 'red', 'green')
 
 
 # #PETRO-------------------------------------------------------------------------------------------------
@@ -746,9 +746,9 @@ fig.add_annotation(x=0, y=((df_ewz['Variação']/2).iloc[0]),text=str (ewz_preco
 
 
 #VALE
-fig.add_trace(go.Bar(name='Net2', x=df_vale['Leilão'], y=df_vale['Variação'], marker_color=df_vale['Color'], text= [str(i1)+' %' for i1 in df_vale['Variação']], textposition='inside', width=0.5, marker_line_color='black', marker_line_width=1),row=4, col=1 )
-fig.add_shape(type='line', x0=-0.5, y0=0, x1=1.5, y1=0, line=dict( color='black', width=5,),row=4, col=1)
-fig.add_annotation(x=0, y=((df_vale['Variação']/2).iloc[0]),text=str (vale_preco_04),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=4, col=1)
+# fig.add_trace(go.Bar(name='Net2', x=df_vale['Leilão'], y=df_vale['Variação'], marker_color=df_vale['Color'], text= [str(i1)+' %' for i1 in df_vale['Variação']], textposition='inside', width=0.5, marker_line_color='black', marker_line_width=1),row=4, col=1 )
+# fig.add_shape(type='line', x0=-0.5, y0=0, x1=1.5, y1=0, line=dict( color='black', width=5,),row=4, col=1)
+# fig.add_annotation(x=0, y=((df_vale['Variação']/2).iloc[0]),text=str (vale_preco_04),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=4, col=1)
 
 
 #PETRO
@@ -780,7 +780,7 @@ fig.add_annotation(x=0, y=((df_vale['Variação']/2).iloc[0]),text=str (vale_pre
 #fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,2)"), row=3, col=2)
 #fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,2)"), row=3, col=3)
 
-#fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(4,1)"), row=4, col=1)
+fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(4,1)"), row=4, col=1)
 fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=4, col=2)
 fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=4, col=3)
 #fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=4, col=4)
