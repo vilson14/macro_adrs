@@ -102,6 +102,30 @@ ouro_var_07 = float(ouro_var_06)
 
 
 
+#BRENT-------------------------------------------------------------------------------------------------------------------------------------
+url = 'https://br.investing.com/commodities/brent-oil'
+req = Request(url, headers=head)
+html1 = urlopen(req)
+html2 = html1.read()
+soup = BeautifulSoup(html2, "html.parser")
+
+brent_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
+brent_preco_02 = brent_preco_01.getText()
+brent_preco_03 = brent_preco_02.replace(',', '.')
+brent_preco_04 = float(brent_preco_03)
+
+
+brent_var_01 = soup.find('span', {"data-test": "instrument-price-change-percent"})
+brent_var_02 = brent_var_01.getText()
+brent_var_03 = brent_var_02.replace('(', '')
+brent_var_04 = brent_var_03.replace(')', '')
+brent_var_05 = brent_var_04.replace('%', '')
+brent_var_06 = brent_var_05.replace(',', '.')
+brent_var_07 = float(brent_var_06)
+
+
+
+
 
 #VIX-------------------------------------------------------------------------------------------------
 ativos_vix=['Variação']
@@ -125,6 +149,18 @@ df_ouro = pd.DataFrame({
 })
 
 df_ouro["Color"] = np.where(df_ouro["Variação"]<0, 'red', 'green')
+
+
+#BRENT-------------------------------------------------------------------------------------------------
+ativos_brent=['Variação']
+y_var_brent=[brent_var_07]
+
+df_brent = pd.DataFrame({
+     'Variação':[brent_var_07], 
+     'Leilão':['Variação']
+})
+
+df_brent["Color"] = np.where(df_brent["Variação"]<0, 'red', 'green')
 
 
 
@@ -157,10 +193,17 @@ fig.add_shape(type='line', x0=-0.5, y0=0, x1=0.5, y1=0, line=dict( color='black'
 fig.add_annotation(x=0, y=((df_ouro['Variação']/2).iloc[0]),text=str (ouro_preco_05),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=1, col=2)
 
 
+#BRENT
+fig.add_trace(go.Bar(x=ativos_brent, y=df_brent['Variação'], marker_color=df_brent['Color'], text= [str(i1)+' %' for i1 in df_brent['Variação']], textposition='inside', textfont_color="white", insidetextanchor = "end", width=0.3, marker_line_color='black', marker_line_width=1), row=1, col=3)
+fig.add_shape(type='line', x0=-0.5, y0=0, x1=0.5, y1=0, line=dict( color='black', width=5,),row=1, col=3)
+fig.add_annotation(x=0, y=((df_brent['Variação']/2).iloc[0]),text=str (brent_preco_04),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=1, col=3)
+
+
+
 
 #fig.add_trace(go.Scatter(x=[4,5], y=[30,30], name="(1,2)"), row=1, col=1)
 #fig.add_trace(go.Scatter(x=[4,5], y=[30,30], name="(1,2)"), row=1, col=2)
-fig.add_trace(go.Scatter(x=[3,5], y=[5,7], name="(2,2)"), row=1, col=3)
+#fig.add_trace(go.Scatter(x=[3,5], y=[5,7], name="(2,2)"), row=1, col=3)
 #fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,2)"), row=2, col=1)
 fig.add_trace(go.Scatter(x=[3,5], y=[5,7], name="(2,3)"), row=2, col=3)
 fig.add_trace(go.Scatter(x=[3,5], y=[5,7], name="(1,4)"), row=1, col=4)
