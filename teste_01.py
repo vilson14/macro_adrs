@@ -124,6 +124,37 @@ brent_var_06 = brent_var_05.replace(',', '.')
 brent_var_07 = float(brent_var_06)
 
 
+#SP500-------------------------------------------------------------------------------------------------------------------------------------
+url = 'https://br.investing.com/indices/us-spx-500-futures'
+req = Request(url, headers=head)
+html1 = urlopen(req)
+html2 = html1.read()
+soup = BeautifulSoup(html2, "html.parser")
+
+sp500_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
+sp500_preco_02 = sp500_preco_01.getText()
+sp500_preco_03 = sp500_preco_02.replace('.', '')
+sp500_preco_04 = sp500_preco_03.replace(',', '.')
+sp500_preco_05 = float(sp500_preco_04)
+
+
+
+sp500_var_01 = soup.find('span', {"data-test": "instrument-price-change-percent"})
+sp500_var_02 = sp500_var_01.getText()
+sp500_var_03 = sp500_var_02.replace('(', '')
+sp500_var_04 = sp500_var_03.replace(')', '')
+sp500_var_05 = sp500_var_04.replace('%', '')
+sp500_var_06 = sp500_var_05.replace(',', '.')
+sp500_var_07 = float(sp500_var_06)
+
+
+
+time.sleep(2)
+
+
+
+
+
 
 
 
@@ -163,6 +194,18 @@ df_brent = pd.DataFrame({
 df_brent["Color"] = np.where(df_brent["Variação"]<0, 'red', 'green')
 
 
+#SP500-------------------------------------------------------------------------------------------------
+ativos_sp500=['Variação']
+y_var_sp500=[sp500_var_07]
+
+df_sp500 = pd.DataFrame({
+     'Variação':[sp500_var_07], 
+     'Leilão':['Variação']
+})
+
+df_sp500["Color"] = np.where(df_sp500["Variação"]<0, 'red', 'green')
+
+
 
 
 
@@ -199,6 +242,12 @@ fig.add_shape(type='line', x0=-0.5, y0=0, x1=0.5, y1=0, line=dict( color='black'
 fig.add_annotation(x=0, y=((df_brent['Variação']/2).iloc[0]),text=str (brent_preco_04),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=1, col=3)
 
 
+#SP500
+fig.add_trace(go.Bar(x=ativos_sp500, y=df_sp500['Variação'], marker_color=df_sp500['Color'], text= [str(i1)+' %' for i1 in df_sp500['Variação']], textposition='inside', textfont_color="white", insidetextanchor = "end", width=0.3, marker_line_color='black', marker_line_width=1), row=1, col=4)
+fig.add_shape(type='line', x0=-0.5, y0=0, x1=0.5, y1=0, line=dict( color='black', width=5,),row=1, col=4)
+fig.add_annotation(x=0, y=((df_sp500['Variação']/2).iloc[0]),text=str (sp500_preco_05),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=1, col=4)
+
+
 
 
 #fig.add_trace(go.Scatter(x=[4,5], y=[30,30], name="(1,2)"), row=1, col=1)
@@ -206,7 +255,7 @@ fig.add_annotation(x=0, y=((df_brent['Variação']/2).iloc[0]),text=str (brent_p
 #fig.add_trace(go.Scatter(x=[3,5], y=[5,7], name="(2,2)"), row=1, col=3)
 #fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,2)"), row=2, col=1)
 fig.add_trace(go.Scatter(x=[3,5], y=[5,7], name="(2,3)"), row=2, col=3)
-fig.add_trace(go.Scatter(x=[3,5], y=[5,7], name="(1,4)"), row=1, col=4)
+#fig.add_trace(go.Scatter(x=[3,5], y=[5,7], name="(1,4)"), row=1, col=4)
 #fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(2,1)"), row=2, col=1)
 fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,1)"), row=3, col=1)
 fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,2)"), row=3, col=2)
