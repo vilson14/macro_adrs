@@ -240,9 +240,9 @@ data_hoje_min = (data_hoje + " - "+ hora_minutos)
 
 
 
-fig.update_layout(height=1100, width=2000, title_text="PRE-MARKET - MACRO + ADRS | " + data_hoje) #xaxis_tickfont_size=30
+fig.update_layout(height=1100, width=2000) #xaxis_tickfont_size=30
 
-#st.subheader("PRE-MARKET - MACRO + ADRS " + vix_var_06)
+st.subheader("PRE-MARKET - MACRO + ADRS | " + data_hoje)
 
 
 for i in fig['layout']['annotations']:
@@ -252,6 +252,6 @@ for i in fig['layout']['annotations']:
 
 
 
-
+st.set_page_config(layout="wide")
 
 st.plotly_chart(fig)
