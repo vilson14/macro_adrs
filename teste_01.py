@@ -18,6 +18,30 @@ import plotly.express as px
 from urllib.request import Request, urlopen
 from bs4 import BeautifulSoup
 
+import selenium
+import webdriver_manager
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+
+
+
+
+chrome_options = Options()
+chrome_options.add_experimental_option("detach", True)
+options = webdriver.ChromeOptions()
+options.add_argument("--headless=new") # ocula a janela
+#options.add_experimental_option("detach", True) #mantem aberto o browser
+
+
+options.add_argument("--ignore-certificate-error")
+options.add_argument('--ignore-certificate-errors-spki-list')
+options.add_argument("--ignore-ssl-errors")
+options.add_argument('log-level=3')
+
+#options.add_argument("--window-size=1920,1200")
+
+driver = webdriver.Chrome(options=options) ## set opcoes definidas
+
 
 
 
