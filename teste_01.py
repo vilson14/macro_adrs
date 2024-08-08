@@ -369,6 +369,119 @@ if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
 
 
 
+#PETRO-------------------------------------------------------------------------------------------------------------------------------------
+
+url = 'https://br.investing.com/equities/petroleo-bras'
+req = Request(url, headers=head)
+html1 = urlopen(req)
+html2 = html1.read()
+soup = BeautifulSoup(html2, "html.parser")
+
+petro_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
+petro_preco_02 = petro_preco_01.getText()
+petro_preco_03 = petro_preco_02.replace(',', '.')
+petro_preco_04 = float(petro_preco_03)
+
+
+
+petro_var_01 = soup.find('span', {"data-test": "instrument-price-change-percent"})
+petro_var_02 = petro_var_01.getText()
+petro_var_03 = petro_var_02.replace('(', '')
+petro_var_04 = petro_var_03.replace(')', '')
+petro_var_05 = petro_var_04.replace('%', '')
+petro_var_06 = petro_var_05.replace(',', '.')
+petro_var_07 = float(petro_var_06)
+
+
+
+petro_leilao_08 = float(0)
+
+if soup.findAll('span', {"text-positive-main text-base/6 rtl:force-ltr"}):
+    #print ("OK")
+    petro_leilao_01 = soup.findAll('span', {"text-positive-main text-base/6 rtl:force-ltr"})
+    petro_leilao_02 = petro_leilao_01[1]
+    petro_leilao_03 = petro_leilao_02.getText()
+    petro_leilao_04 = petro_leilao_03.replace('(', '')
+    petro_leilao_05 = petro_leilao_04.replace(')', '')
+    petro_leilao_06 = petro_leilao_05.replace('%', '')
+    petro_leilao_07 = petro_leilao_06.replace(',', '.')
+    petro_leilao_08 = float(petro_leilao_07)
+    
+    
+    
+
+
+if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
+    #print ("BUG")
+    petro_leilao_01 = soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"})
+    petro_leilao_02 = petro_leilao_01[1]
+    petro_leilao_03 = petro_leilao_02.getText()
+    petro_leilao_04 = petro_leilao_03.replace('(', '')
+    petro_leilao_05 = petro_leilao_04.replace(')', '')
+    petro_leilao_06 = petro_leilao_05.replace('%', '')
+    petro_leilao_07 = petro_leilao_06.replace(',', '.')
+    petro_leilao_08 = float(petro_leilao_07)
+    
+
+
+
+time.sleep(2)
+#ITAU-------------------------------------------------------------------------------------------------------------------------------------
+url = 'https://br.investing.com/equities/itau-unibanco-holding-sa-adr'
+req = Request(url, headers=head)
+html1 = urlopen(req)
+html2 = html1.read()
+soup = BeautifulSoup(html2, "html.parser")
+
+itau_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
+itau_preco_02 = itau_preco_01.getText()
+itau_preco_03 = itau_preco_02.replace(',', '.')
+itau_preco_04 = float(itau_preco_03)
+
+
+
+itau_var_01 = soup.find('span', {"data-test": "instrument-price-change-percent"})
+itau_var_02 = itau_var_01.getText()
+itau_var_03 = itau_var_02.replace('(', '')
+itau_var_04 = itau_var_03.replace(')', '')
+itau_var_05 = itau_var_04.replace('%', '')
+itau_var_06 = itau_var_05.replace(',', '.')
+itau_var_07 = float(itau_var_06)
+
+
+itau_leilao_08 = float(0)
+
+if soup.findAll('span', {"text-positive-main text-base/6 rtl:force-ltr"}):
+    #print ("OK")
+    itau_leilao_01 = soup.findAll('span', {"text-positive-main text-base/6 rtl:force-ltr"})
+    itau_leilao_02 = itau_leilao_01[1]
+    itau_leilao_03 = itau_leilao_02.getText()
+    itau_leilao_04 = itau_leilao_03.replace('(', '')
+    itau_leilao_05 = itau_leilao_04.replace(')', '')
+    itau_leilao_06 = itau_leilao_05.replace('%', '')
+    itau_leilao_07 = itau_leilao_06.replace(',', '.')
+    itau_leilao_08 = float(itau_leilao_07)
+    
+    
+    
+
+
+if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
+    #print ("BUG")
+    itau_leilao_01 = soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"})
+    itau_leilao_02 = itau_leilao_01[1]
+    itau_leilao_03 = itau_leilao_02.getText()
+    itau_leilao_04 = itau_leilao_03.replace('(', '')
+    itau_leilao_05 = itau_leilao_04.replace(')', '')
+    itau_leilao_06 = itau_leilao_05.replace('%', '')
+    itau_leilao_07 = itau_leilao_06.replace(',', '.')
+    itau_leilao_08 = float(itau_leilao_07)
+    
+
+
+
+
+
 
 
 
@@ -480,6 +593,43 @@ df_vale = pd.DataFrame({
 df_vale["Color"] = np.where(df_vale["Variação"]<0, 'red', 'green')
 
 
+#PETRO-------------------------------------------------------------------------------------------------
+ativos_petro=['Variação']
+y_var_petro=[petro_var_07]
+
+df_petro = pd.DataFrame({
+     'Variação':[petro_var_07,petro_leilao_08], 
+     'Leilão':['Variação','Leilão']
+})
+
+df_petro["Color"] = np.where(df_petro["Variação"]<0, 'red', 'green')
+
+
+#SALDO VALE E PETRO-------------------------------------------------------------------------------------------------
+ativos_s_vale_petro=['Variação']
+y_var_s_vale_petro=[petro_var_07]
+
+df_s_vale_petro = pd.DataFrame({
+     'Variação':[round ((vale_var_07+petro_var_07),2),round ((vale_leilao_08+petro_leilao_08),2)], 
+     'Leilão':['Variação','Leilão']
+})
+
+df_s_vale_petro["Color"] = np.where(df_s_vale_petro["Variação"]<0, 'red', 'green')
+
+
+
+#ITAU-------------------------------------------------------------------------------------------------
+ativos_itau=['Variação']
+y_var_itau=[itau_var_07]
+
+df_itau = pd.DataFrame({
+     'Variação':[itau_var_07,itau_leilao_08], 
+     'Leilão':['Variação','Leilão']
+})
+
+df_itau["Color"] = np.where(df_itau["Variação"]<0, 'red', 'green')
+
+
 
 
 
@@ -548,6 +698,22 @@ fig.add_shape(type='line', x0=-0.5, y0=0, x1=1.5, y1=0, line=dict( color='black'
 fig.add_annotation(x=0, y=((df_vale['Variação']/2).iloc[0]),text=str (vale_preco_04),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=4, col=1)
 
 
+#PETRO
+fig.add_trace(go.Bar(name='Net1', x=df_petro['Leilão'], y=df_petro['Variação'], marker_color=df_petro['Color'], text= [str(i1)+' %' for i1 in df_petro['Variação']], textposition='inside', width=0.5, marker_line_color='black', marker_line_width=1),row=4, col=2 )
+fig.add_shape(type='line', x0=-0.5, y0=0, x1=1.5, y1=0, line=dict( color='black', width=5,),row=4, col=2)
+fig.add_annotation(x=0, y=((df_petro['Variação']/2).iloc[0]),text=str (petro_preco_04),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=4, col=2)
+
+#SALDO VALE + PETRO
+fig.add_trace(go.Bar(name='Net3', x=df_s_vale_petro['Leilão'], y=df_s_vale_petro['Variação'], marker_color=df_s_vale_petro['Color'], text= [str(i1)+' %' for i1 in df_s_vale_petro['Variação']], textposition='inside', width=0.5, marker_line_color='black', marker_line_width=1),row=4, col=3 )
+fig.add_shape(type='line', x0=-0.5, y0=0, x1=1.5, y1=0, line=dict( color='black', width=5,),row=4, col=3)
+
+
+#ITAU
+fig.add_trace(go.Bar(name='Net3', x=df_itau['Leilão'], y=df_itau['Variação'], marker_color=df_itau['Color'], text= [str(i1)+' %' for i1 in df_itau['Variação']], textposition='inside', width=0.5, marker_line_color='black', marker_line_width=1),row=5, col=1 )
+fig.add_shape(type='line', x0=-0.5, y0=0, x1=1.5, y1=0, line=dict( color='black', width=5,),row=5, col=1)
+fig.add_annotation(x=0, y=((df_itau['Variação']/2).iloc[0]),text=str (itau_preco_04),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=5, col=1)
+
+
 
 
 #fig.add_trace(go.Scatter(x=[4,5], y=[30,30], name="(1,2)"), row=1, col=1)
@@ -562,10 +728,10 @@ fig.add_annotation(x=0, y=((df_vale['Variação']/2).iloc[0]),text=str (vale_pre
 #fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,2)"), row=3, col=3)
 
 #fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(4,1)"), row=4, col=1)
-fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=4, col=2)
-fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=4, col=3)
+#fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=4, col=2)
+#fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=4, col=3)
 #fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=4, col=4)
-fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=5, col=1)
+#fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=5, col=1)
 fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=5, col=2)
 fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=5, col=3)
 fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=5, col=4)
