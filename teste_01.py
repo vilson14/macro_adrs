@@ -308,7 +308,7 @@ if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
 
 
 
-time.sleep(2)
+
 #VALE-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/equities/vale-s.a.--americ'
 req = Request(url, headers=head)
@@ -422,7 +422,7 @@ if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
     
 
 
-time.sleep(2)
+
 #ITAU-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/equities/itau-unibanco-holding-sa-adr'
 req = Request(url, headers=head)
@@ -476,7 +476,7 @@ if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
     print (itau_leilao_08)
     
     
-time.sleep(2)
+
 #BRADESCO-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/equities/banco-bradesco-s-a-adr'
 req = Request(url, headers=head)
@@ -532,7 +532,7 @@ if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
     print (bradesco_leilao_08)
     
     
-time.sleep(2)
+
 #BRASIL-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/equities/banco-do-brasil-sa'
 req = Request(url, headers=head)
@@ -838,63 +838,6 @@ fig.add_annotation(x=0, y=((df_minerio_dalian['Variação']/2).iloc[0]),text=str
 
 
 
-#minerio_cme
-fig.add_trace(go.Bar(x=ativos_minerio_cme, y=df_minerio_cme['Variação'], marker_color=df_minerio_cme['Color'], text= [str(i1)+' %' for i1 in df_minerio_cme['Variação']], textposition='inside', textfont_color="white", insidetextanchor = "end", width=0.3, marker_line_color='black', marker_line_width=1), row=3, col=2)
-fig.add_shape(type='line', x0=-0.5, y0=0, x1=0.5, y1=0, line=dict( color='black', width=5,),row=3, col=2)
-fig.add_annotation(x=0, y=((df_minerio_cme['Variação']/2).iloc[0]),text=str (minerio_cme_preco_04),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=3, col=2)
-
-
-#EWZ
-fig.add_trace(go.Bar(name='Net2', x=df_ewz['Leilão'], y=df_ewz['Variação'], marker_color=df_ewz['Color'], text= [str(i1)+' %' for i1 in df_ewz['Variação']], textposition='inside', width=0.5, marker_line_color='black', marker_line_width=1),row=3, col=3 )
-fig.add_shape(type='line', x0=-0.5, y0=0, x1=1.5, y1=0, line=dict( color='black', width=5,),row=3, col=3)
-fig.add_annotation(x=0, y=((df_ewz['Variação']/2).iloc[0]),text=str (ewz_preco_04),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=3, col=3)
-
-
-#PETRO
-fig.add_trace(go.Bar(name='Net1', x=df_petro['Leilão'], y=df_petro['Variação'], marker_color=df_petro['Color'], text= [str(i1)+' %' for i1 in df_petro['Variação']], textposition='inside', width=0.5, marker_line_color='black', marker_line_width=1),row=4, col=2 )
-fig.add_shape(type='line', x0=-0.5, y0=0, x1=1.5, y1=0, line=dict( color='black', width=5,),row=4, col=2)
-fig.add_annotation(x=0, y=((df_petro['Variação']/2).iloc[0]),text=str (petro_preco_04),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=4, col=2)
-
-
-#VALE
-fig.add_trace(go.Bar(name='Net2', x=df_vale['Leilão'], y=df_vale['Variação'], marker_color=df_vale['Color'], text= [str(i1)+' %' for i1 in df_vale['Variação']], textposition='inside', width=0.5, marker_line_color='black', marker_line_width=1),row=4, col=1 )
-fig.add_shape(type='line', x0=-0.5, y0=0, x1=1.5, y1=0, line=dict( color='black', width=5,),row=4, col=1)
-fig.add_annotation(x=0, y=((df_vale['Variação']/2).iloc[0]),text=str (vale_preco_04),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=4, col=1)
-
-#ITAU
-fig.add_trace(go.Bar(name='Net3', x=df_itau['Leilão'], y=df_itau['Variação'], marker_color=df_itau['Color'], text= [str(i1)+' %' for i1 in df_itau['Variação']], textposition='inside', width=0.5, marker_line_color='black', marker_line_width=1),row=5, col=1 )
-fig.add_shape(type='line', x0=-0.5, y0=0, x1=1.5, y1=0, line=dict( color='black', width=5,),row=5, col=1)
-fig.add_annotation(x=0, y=((df_itau['Variação']/2).iloc[0]),text=str (itau_preco_04),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=5, col=1)
-
-
-#BRADESCO
-fig.add_trace(go.Bar(name='Net4', x=df_bradesco['Leilão'], y=df_bradesco['Variação'], marker_color=df_bradesco['Color'], text= [str(i1)+' %' for i1 in df_bradesco['Variação']], textposition='inside', width=0.5, marker_line_color='black', marker_line_width=1),row=5, col=2 )
-fig.add_shape(type='line', x0=-0.5, y0=0, x1=1.5, y1=0, line=dict( color='black', width=5,),row=5, col=2)
-fig.add_annotation(x=0, y=((df_bradesco['Variação']/2).iloc[0]),text=str (bradesco_preco_04),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=5, col=2)
-
-
-#BRASIL
-fig.add_trace(go.Bar(name='Net4', x=df_brasil['Leilão'], y=df_brasil['Variação'], marker_color=df_brasil['Color'], text= [str(i1)+' %' for i1 in df_brasil['Variação']], textposition='inside', width=0.5, marker_line_color='black', marker_line_width=1),row=5, col=3 )
-fig.add_shape(type='line', x0=-0.5, y0=0, x1=1.5, y1=0, line=dict( color='black', width=5,),row=5, col=3)
-fig.add_annotation(x=0, y=((df_brasil['Variação']/2).iloc[0]),text=str (brasil_preco_04),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=5, col=3)
-
-
-
-#SALDO VALE + PETRO
-fig.add_trace(go.Bar(name='Net3', x=df_s_vale_petro['Leilão'], y=df_s_vale_petro['Variação'], marker_color=df_s_vale_petro['Color'], text= [str(i1)+' %' for i1 in df_s_vale_petro['Variação']], textposition='inside', width=0.5, marker_line_color='black', marker_line_width=1),row=4, col=3 )
-fig.add_shape(type='line', x0=-0.5, y0=0, x1=1.5, y1=0, line=dict( color='black', width=5,),row=4, col=3)
-
-
-
-#SALDO BANCOS
-fig.add_trace(go.Bar(name='Net3', x=df_s_bancos['Leilão'], y=df_s_bancos['Variação'], marker_color=df_s_bancos['Color'], text= [str(i1)+' %' for i1 in df_s_bancos['Variação']], textposition='inside', width=0.5, marker_line_color='black', marker_line_width=1),row=5, col=4 )
-fig.add_shape(type='line', x0=-0.5, y0=0, x1=1.5, y1=0, line=dict( color='black', width=5,),row=5, col=4)
-
-
-#SALDO TOTAL
-fig.add_trace(go.Bar(name='Net3', x=df_s_total['Leilão'], y=df_s_total['Variação'], marker_color=df_s_total['Color'], text= [str(i1)+' %' for i1 in df_s_total['Variação']], textposition='inside', width=0.5, marker_line_color='black', marker_line_width=1),row=3, col=4 )
-fig.add_shape(type='line', x0=-0.5, y0=0, x1=1.5, y1=0, line=dict( color='black', width=5,),row=3, col=4)
-
 
 
 
@@ -906,17 +849,17 @@ fig.add_shape(type='line', x0=-0.5, y0=0, x1=1.5, y1=0, line=dict( color='black'
 #fig.add_trace(go.Scatter(x=[3,5], y=[5,7], name="(1,4)"), row=1, col=4)
 #fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(2,1)"), row=2, col=1)
 #fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,1)"), row=3, col=1)
-# fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,2)"), row=3, col=2)
-# fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,2)"), row=3, col=3)
+fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,2)"), row=3, col=2)
+fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,2)"), row=3, col=3)
 
-# fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(4,1)"), row=4, col=1)
-# fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=4, col=2)
-# fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=4, col=3)
-# #fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=4, col=4)
-# fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=5, col=1)
-# fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=5, col=2)
-# fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=5, col=3)
-# fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=5, col=4)
+fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(4,1)"), row=4, col=1)
+fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=4, col=2)
+fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=4, col=3)
+#fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=4, col=4)
+fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=5, col=1)
+fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=5, col=2)
+fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=5, col=3)
+fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(5,1)"), row=5, col=4)
 
 
 fig.update_layout(showlegend=False)
