@@ -154,6 +154,30 @@ time.sleep(2)
 
 
 
+#WTI-------------------------------------------------------------------------------------------------------------------------------------
+url = 'https://br.investing.com/commodities/crude-oil'
+req = Request(url, headers=head)
+html1 = urlopen(req)
+html2 = html1.read()
+soup = BeautifulSoup(html2, "html.parser")
+
+wti_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
+wti_preco_02 = wti_preco_01.getText()
+wti_preco_03 = wti_preco_02.replace(',', '.')
+wti_preco_04 = float(wti_preco_03)
+
+wti_var_01 = soup.find('span', {"data-test": "instrument-price-change-percent"})
+wti_var_02 = wti_var_01.getText()
+wti_var_03 = wti_var_02.replace('(', '')
+wti_var_04 = wti_var_03.replace(')', '')
+wti_var_05 = wti_var_04.replace('%', '')
+wti_var_06 = wti_var_05.replace(',', '.')
+wti_var_07 = float(wti_var_06)
+print (wti_var_07)
+
+
+
+
 
 
 
@@ -205,6 +229,17 @@ df_sp500 = pd.DataFrame({
 
 df_sp500["Color"] = np.where(df_sp500["Variação"]<0, 'red', 'green')
 
+#WTI-------------------------------------------------------------------------------------------------
+ativos_wti=['Variação']
+y_var_wti=[wti_var_07]
+
+df_wti = pd.DataFrame({
+     'Variação':[wti_var_07], 
+     'Leilão':['Variação']
+})
+
+df_wti["Color"] = np.where(df_wti["Variação"]<0, 'red', 'green')
+
 
 
 
@@ -247,6 +282,11 @@ fig.add_trace(go.Bar(x=ativos_sp500, y=df_sp500['Variação'], marker_color=df_s
 fig.add_shape(type='line', x0=-0.5, y0=0, x1=0.5, y1=0, line=dict( color='black', width=5,),row=1, col=4)
 fig.add_annotation(x=0, y=((df_sp500['Variação']/2).iloc[0]),text=str (sp500_preco_05),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=1, col=4)
 
+#WTI
+fig.add_trace(go.Bar(x=ativos_wti, y=df_wti['Variação'], marker_color=df_wti['Color'], text= [str(i1)+' %' for i1 in df_wti['Variação']], textposition='inside', textfont_color="white", insidetextanchor = "end", width=0.3, marker_line_color='black', marker_line_width=1), row=2, col=3)
+fig.add_shape(type='line', x0=-0.5, y0=0, x1=0.5, y1=0, line=dict( color='black', width=5,),row=2, col=3)
+fig.add_annotation(x=0, y=((df_wti['Variação']/2).iloc[0]),text=str (wti_preco_04),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=2, col=3)
+
 
 
 
@@ -254,7 +294,7 @@ fig.add_annotation(x=0, y=((df_sp500['Variação']/2).iloc[0]),text=str (sp500_p
 #fig.add_trace(go.Scatter(x=[4,5], y=[30,30], name="(1,2)"), row=1, col=2)
 #fig.add_trace(go.Scatter(x=[3,5], y=[5,7], name="(2,2)"), row=1, col=3)
 #fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,2)"), row=2, col=1)
-fig.add_trace(go.Scatter(x=[3,5], y=[5,7], name="(2,3)"), row=2, col=3)
+#fig.add_trace(go.Scatter(x=[3,5], y=[5,7], name="(2,3)"), row=2, col=3)
 #fig.add_trace(go.Scatter(x=[3,5], y=[5,7], name="(1,4)"), row=1, col=4)
 #fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(2,1)"), row=2, col=1)
 fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,1)"), row=3, col=1)
