@@ -224,6 +224,36 @@ minerio_dalian_var_04 = 0
 
 
 
+#MINERIO CME-------------------------------------------------------------------------------------------------------------------------------------
+url = 'https://br.investing.com/commodities/iron-ore-62-cfr-futures'
+req = Request(url, headers=head)
+html1 = urlopen(req)
+html2 = html1.read()
+soup = BeautifulSoup(html2, "html.parser")
+
+minerio_cme_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
+minerio_cme_preco_02 = minerio_cme_preco_01.getText()
+minerio_cme_preco_03 = minerio_cme_preco_02.replace(',', '.')
+minerio_cme_preco_04 = float(minerio_cme_preco_03)
+
+
+
+minerio_cme_var_01 = soup.find('span', {"data-test": "instrument-price-change-percent"})
+minerio_cme_var_02 = minerio_cme_var_01.getText()
+minerio_cme_var_03 = minerio_cme_var_02.replace('(', '')
+minerio_cme_var_04 = minerio_cme_var_03.replace(')', '')
+minerio_cme_var_05 = minerio_cme_var_04.replace('%', '')
+minerio_cme_var_06 = minerio_cme_var_05.replace(',', '.')
+minerio_cme_var_07 = float(minerio_cme_var_06)
+
+
+
+
+
+
+
+
+
 
 
 
@@ -301,6 +331,18 @@ df_minerio_dalian = pd.DataFrame({
 df_minerio_dalian["Color"] = np.where(df_minerio_dalian["Variação"]<0, 'red', 'green')
 
 
+#minerio_cme-------------------------------------------------------------------------------------------------
+ativos_minerio_cme=['Variação']
+y_var_minerio_cme=[minerio_cme_var_07]
+
+df_minerio_cme = pd.DataFrame({
+     'Variação':[minerio_cme_var_07], 
+     'Leilão':['Variação']
+})
+
+df_minerio_cme["Color"] = np.where(df_minerio_cme["Variação"]<0, 'red', 'green')
+
+
 
 
 
@@ -352,6 +394,11 @@ fig.add_trace(go.Bar(x=ativos_minerio_dalian, y=df_minerio_dalian['Variação'],
 fig.add_shape(type='line', x0=-0.5, y0=0, x1=0.5, y1=0, line=dict( color='black', width=5,),row=3, col=1)
 fig.add_annotation(x=0, y=((df_minerio_dalian['Variação']/2).iloc[0]),text=str (minerio_dalian_preco_02),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=3, col=1)
 
+#minerio_cme
+fig.add_trace(go.Bar(x=ativos_minerio_cme, y=df_minerio_cme['Variação'], marker_color=df_minerio_cme['Color'], text= [str(i1)+' %' for i1 in df_minerio_cme['Variação']], textposition='inside', textfont_color="white", insidetextanchor = "end", width=0.3, marker_line_color='black', marker_line_width=1), row=3, col=2)
+fig.add_shape(type='line', x0=-0.5, y0=0, x1=0.5, y1=0, line=dict( color='black', width=5,),row=3, col=2)
+fig.add_annotation(x=0, y=((df_minerio_cme['Variação']/2).iloc[0]),text=str (minerio_cme_preco_04),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=3, col=2)
+
 
 
 
@@ -362,8 +409,8 @@ fig.add_annotation(x=0, y=((df_minerio_dalian['Variação']/2).iloc[0]),text=str
 #fig.add_trace(go.Scatter(x=[3,5], y=[5,7], name="(2,3)"), row=2, col=3)
 #fig.add_trace(go.Scatter(x=[3,5], y=[5,7], name="(1,4)"), row=1, col=4)
 #fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(2,1)"), row=2, col=1)
-fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,1)"), row=3, col=1)
-fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,2)"), row=3, col=2)
+#fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,1)"), row=3, col=1)
+#fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,2)"), row=3, col=2)
 fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(3,2)"), row=3, col=3)
 
 fig.add_trace(go.Scatter(x=[4,5], y=[7,8], name="(4,1)"), row=4, col=1)
