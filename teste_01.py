@@ -247,7 +247,7 @@ minerio_cme_var_06 = minerio_cme_var_05.replace(',', '.')
 minerio_cme_var_07 = float(minerio_cme_var_06)
 
 
-
+time.sleep(2)
 #EWZ-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/etfs/ishares-brazil-index'
 req = Request(url, headers=head)
@@ -368,7 +368,7 @@ if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
 
 
 
-
+time.sleep(2)
 #PETRO-------------------------------------------------------------------------------------------------------------------------------------
 
 url = 'https://br.investing.com/equities/petroleo-bras'
