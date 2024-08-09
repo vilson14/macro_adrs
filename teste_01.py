@@ -185,36 +185,15 @@ brent_var_07 = float(brent_var_03)
 
 
 #SP500-------------------------------------------------------------------------------------------------------------------------------------
-url = 'https://br.investing.com/indices/us-spx-500-futures'
-# req = Request(url, headers=head)
-# html1 = urlopen(req)
-# html2 = html1.read()
-# soup = BeautifulSoup(html2, "html.parser")
+sp500_df = get_data_ticker ("ES*0")
+sp500_preco_01 = sp500_df['lastPrice'].iloc[0]
+sp500_preco_02 = sp500_preco_01.replace(',', '')
+sp500_preco_05 = float(sp500_preco_02)
 
-request = urllib.request.Request (url, headers=head)
-f = urllib.request.urlopen (request)
-html2 = f.read()
-soup = BeautifulSoup(html2, "html.parser")
-
-sp500_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
-sp500_preco_02 = sp500_preco_01.getText()
-sp500_preco_03 = sp500_preco_02.replace('.', '')
-sp500_preco_04 = sp500_preco_03.replace(',', '.')
-sp500_preco_05 = float(sp500_preco_04)
-
-
-
-sp500_var_01 = soup.find('span', {"data-test": "instrument-price-change-percent"})
-sp500_var_02 = sp500_var_01.getText()
-sp500_var_03 = sp500_var_02.replace('(', '')
-sp500_var_04 = sp500_var_03.replace(')', '')
-sp500_var_05 = sp500_var_04.replace('%', '')
-sp500_var_06 = sp500_var_05.replace(',', '.')
-sp500_var_07 = float(sp500_var_06)
-
-
-
-time.sleep(3)
+sp500_var_01 = sp500_df['percentChange'].iloc[0]
+sp500_var_02 = sp500_var_01.replace('%', '')
+sp500_var_03 = sp500_var_02.replace('+', '')
+sp500_var_07 = float(sp500_var_03)
 
 
 
