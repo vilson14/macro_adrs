@@ -70,6 +70,57 @@ import json
 
 
 
+apiurl=r'https://www.barchart.com/proxies/core-api/v1/quotes/get'
+getheaders={
+
+    'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
+    'accept-encoding': 'gzip, deflate, br',
+    'accept-language': 'en-US,en;q=0.9',
+    'cache-control': 'max-age=0',
+    'upgrade-insecure-requests': '1',
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36'
+    }
+
+getpay={
+    'page': 'all'
+}
+
+
+
+#FUNCAO GET DATA ATIVO------------------------------------------------------------------------------------------------------------------------------
+def get_data_ticker(A):
+    geturl=r'https://www.barchart.com/stocks/quotes/'+A
+    s=requests.Session()
+    r=s.get(geturl,params=getpay, headers=getheaders)
+    headers={
+    'accept': 'application/json',
+    'accept-encoding': 'gzip, deflate, br',
+    'accept-language': 'en-US,en;q=0.9',
+    'referer': geturl,
+    'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.119 Safari/537.36',
+    'x-xsrf-token': unquote(unquote(s.cookies.get_dict()['XSRF-TOKEN']))
+    }
+    
+    payload={
+    "symbol":A,
+    'fields': 'symbol,lastPrice,percentChange,percentChangeExt,volume,tradeTime',
+    'list': 'futures.contractInRoot',
+    'root': A,
+    'meta': 'field.shortName,field.type,field.description',
+    'hasOptions': 'true',
+    'raw': '1'
+    }
+    
+    r=s.get(apiurl,params=payload,headers=headers).json()
+    df_data_ticker = pd.DataFrame(r['data']).iloc[:, :-1]
+    
+    return df_data_ticker
+
+
+
+
+
+
 
 
 
@@ -95,32 +146,17 @@ head = {
 
 
 #VIX-------------------------------------------------------------------------------------------------------------------------------------
-url = 'https://br.investing.com/indices/volatility-s-p-500'
-# req = Request(url, headers=head)
-# html1 = urlopen(req)
-# html2 = html1.read()
-# soup = BeautifulSoup(html2, "html.parser")
+vix_df = get_data_ticker ("$VIX")
+vix_preco_01 = vix_df['lastPrice'].iloc[0]
+vix_preco_04 = float(vix_preco_01)
 
-request = urllib.request.Request (url, headers=head)
-f = urllib.request.urlopen (request)
-html2 = f.read()
-soup = BeautifulSoup(html2, "html.parser")
+vix_var_01 = vix_df['percentChange'].iloc[0]
+vix_var_02 = vix_var_01.replace('%', '')
+vix_var_03 = vix_var_02.replace('+', '')
+vix_var_07 = float(vix_var_03)
 
-vix_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
-vix_preco_02 = vix_preco_01.getText()
-vix_preco_03 = vix_preco_02.replace(',', '.')
-vix_preco_04 = float(vix_preco_03)
-
-
-vix_var_01 = soup.find('span', {"data-test": "instrument-price-change-percent"})
-vix_var_02 = vix_var_01.getText()
-vix_var_03 = vix_var_02.replace('(', '')
-vix_var_04 = vix_var_03.replace(')', '')
-vix_var_05 = vix_var_04.replace('%', '')
-vix_var_06 = vix_var_05.replace(',', '.')
-vix_var_07 = float(vix_var_06)
-
-time.sleep(3)
+print(vix_preco_04)
+print(vix_var_07)
 
 #OURO-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/commodities/gold'
