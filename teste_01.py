@@ -230,65 +230,38 @@ minerio_dalian_var_04 = 0
 
 
 #MINERIO CME-------------------------------------------------------------------------------------------------------------------------------------
-url = 'https://br.investing.com/commodities/iron-ore-62-cfr-futures'
-# req = Request(url, headers=head)
-# html1 = urlopen(req)
-# html2 = html1.read()
-# soup = BeautifulSoup(html2, "html.parser")
+minerio_cme_df = get_data_ticker ("CL*0")
+minerio_cme_preco_01 = minerio_cme_df['lastPrice'].iloc[0]
+minerio_cme_preco_02 = minerio_cme_preco_01.replace(',', '')
+minerio_cme_preco_04 = float(minerio_cme_preco_02)
 
-request = urllib.request.Request (url, headers=head)
-f = urllib.request.urlopen (request)
-html2 = f.read()
-soup = BeautifulSoup(html2, "html.parser")
-
-minerio_cme_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
-minerio_cme_preco_02 = minerio_cme_preco_01.getText()
-minerio_cme_preco_03 = minerio_cme_preco_02.replace(',', '.')
-minerio_cme_preco_04 = float(minerio_cme_preco_03)
+minerio_cme_var_01 = minerio_cme_df['percentChange'].iloc[0]
+minerio_cme_var_02 = minerio_cme_var_01.replace('%', '')
+minerio_cme_var_03 = minerio_cme_var_02.replace('+', '')
+minerio_cme_var_07 = float(minerio_cme_var_03)
 
 
 
-minerio_cme_var_01 = soup.find('span', {"data-test": "instrument-price-change-percent"})
-minerio_cme_var_02 = minerio_cme_var_01.getText()
-minerio_cme_var_03 = minerio_cme_var_02.replace('(', '')
-minerio_cme_var_04 = minerio_cme_var_03.replace(')', '')
-minerio_cme_var_05 = minerio_cme_var_04.replace('%', '')
-minerio_cme_var_06 = minerio_cme_var_05.replace(',', '.')
-minerio_cme_var_07 = float(minerio_cme_var_06)
 
-
-time.sleep(3)
 #EWZ-------------------------------------------------------------------------------------------------------------------------------------
-url = 'https://br.investing.com/etfs/ishares-brazil-index'
-# req = Request(url, headers=head)
-# html1 = urlopen(req)
-# html2 = html1.read()
-# soup = BeautifulSoup(html2, "html.parser")
+ewz_df = get_data_ticker ("EWZ")
+ewz_preco_01 = ewz_df['lastPrice'].iloc[0]
+ewz_preco_02 = ewz_preco_01.replace(',', '')
+ewz_preco_04 = float(ewz_preco_02)
 
+ewz_var_01 = ewz_df['percentChange'].iloc[0]
+ewz_var_02 = ewz_var_01.replace('%', '')
+ewz_var_03 = ewz_var_02.replace('+', '')
+ewz_var_07 = float(ewz_var_03)
+
+
+url = 'https://br.investing.com/etfs/ishares-brazil-index'
 request = urllib.request.Request (url, headers=head)
 f = urllib.request.urlopen (request)
 html2 = f.read()
 soup = BeautifulSoup(html2, "html.parser")
-
-ewz_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
-ewz_preco_02 = ewz_preco_01.getText()
-ewz_preco_03 = ewz_preco_02.replace(',', '.')
-ewz_preco_04 = float(ewz_preco_03)
-
-
-
-ewz_var_01 = soup.find('span', {"data-test": "instrument-price-change-percent"})
-ewz_var_02 = ewz_var_01.getText()
-ewz_var_03 = ewz_var_02.replace('(', '')
-ewz_var_04 = ewz_var_03.replace(')', '')
-ewz_var_05 = ewz_var_04.replace('%', '')
-ewz_var_06 = ewz_var_05.replace(',', '.')
-ewz_var_07 = float(ewz_var_06)
-
-
 
 ewz_leilao_08 = float(0)
-
 if soup.findAll('span', {"text-positive-main text-base/6 rtl:force-ltr"}):
     #print ("OK")
     ewz_leilao_01 = soup.findAll('span', {"text-positive-main text-base/6 rtl:force-ltr"})
@@ -299,10 +272,7 @@ if soup.findAll('span', {"text-positive-main text-base/6 rtl:force-ltr"}):
     ewz_leilao_06 = ewz_leilao_05.replace('%', '')
     ewz_leilao_07 = ewz_leilao_06.replace(',', '.')
     ewz_leilao_08 = float(ewz_leilao_07)
-    
-    
-    
-
+    print (ewz_leilao_08)
 
 if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
     #print ("BUG")
@@ -314,7 +284,8 @@ if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
     ewz_leilao_06 = ewz_leilao_05.replace('%', '')
     ewz_leilao_07 = ewz_leilao_06.replace(',', '.')
     ewz_leilao_08 = float(ewz_leilao_07)
-    
+    print (ewz_leilao_08)
+
 
 
 
