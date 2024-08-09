@@ -665,7 +665,7 @@ df_ewz["Color"] = np.where(df_ewz["Variação"]<0, 'red', 'green')
 
 
 
-fig = make_subplots(rows=5, cols=4, subplot_titles=("VIX", "OURO", "BRENT", "SP500", "WTI", "MINÉRIO DALIAN", "MINÉRIO CME", "EWZ", "SALDO TOTAL", "VALE", "PETRO", "SALDO - mat. básicos", "ITAU", "BRADESCO", "BRASIL", "SALDO - financeiro"),
+fig = make_subplots(rows=5, cols=4, subplot_titles=("CBOE", "OURO", "BRENT", "SP500", "WTI", "MINÉRIO DALIAN", "MINÉRIO CME", "EWZ", "SALDO TOTAL", "VALE", "PETRO", "SALDO - mat. básicos", "ITAU", "BRADESCO", "BRASIL", "SALDO - financeiro"),
                     specs=[[{'rowspan':2}, {'rowspan':2}, {}, {'rowspan':2}],
                           [None, None, {}, None],
                           [{}, {}, {}, {'rowspan':2}],
