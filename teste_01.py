@@ -299,65 +299,51 @@ if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
 
 
 
+time.sleep(2)
 
-# time.sleep(3)
 # #VALE-------------------------------------------------------------------------------------------------------------------------------------
-# url = 'https://br.investing.com/equities/vale-s.a.--americ'
-# # req = Request(url, headers=head)
-# # html1 = urlopen(req)
-# # html2 = html1.read()
-# # soup = BeautifulSoup(html2, "html.parser")
+vale_df = get_data_ticker ("VALE")
+vale_preco_01 = vale_df['lastPrice'].iloc[0]
+vale_preco_02 = vale_preco_01.replace(',', '')
+vale_preco_03 = vale_preco_02.replace('s', '')
+vale_preco_04 = float(vale_preco_03)
 
-# request = urllib.request.Request (url, headers=head)
-# f = urllib.request.urlopen (request)
-# html2 = f.read()
-# soup = BeautifulSoup(html2, "html.parser")
-
-# vale_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
-# vale_preco_02 = vale_preco_01.getText()
-# vale_preco_03 = vale_preco_02.replace(',', '.')
-# vale_preco_04 = float(vale_preco_03)
+vale_var_01 = vale_df['percentChange'].iloc[0]
+vale_var_02 = vale_var_01.replace('%', '')
+vale_var_03 = vale_var_02.replace('+', '')
+vale_var_07 = float(vale_var_03)
 
 
+url = 'https://br.investing.com/equities/vale-s.a.--americ'
+request = urllib.request.Request (url, headers=head)
+f = urllib.request.urlopen (request)
+html2 = f.read()
+soup = BeautifulSoup(html2, "html.parser")
 
-# vale_var_01 = soup.find('span', {"data-test": "instrument-price-change-percent"})
-# vale_var_02 = vale_var_01.getText()
-# vale_var_03 = vale_var_02.replace('(', '')
-# vale_var_04 = vale_var_03.replace(')', '')
-# vale_var_05 = vale_var_04.replace('%', '')
-# vale_var_06 = vale_var_05.replace(',', '.')
-# vale_var_07 = float(vale_var_06)
+vale_leilao_08 = float(0)
+if soup.findAll('span', {"text-positive-main text-base/6 rtl:force-ltr"}):
+    #print ("OK")
+    vale_leilao_01 = soup.findAll('span', {"text-positive-main text-base/6 rtl:force-ltr"})
+    vale_leilao_02 = vale_leilao_01[1]
+    vale_leilao_03 = vale_leilao_02.getText()
+    vale_leilao_04 = vale_leilao_03.replace('(', '')
+    vale_leilao_05 = vale_leilao_04.replace(')', '')
+    vale_leilao_06 = vale_leilao_05.replace('%', '')
+    vale_leilao_07 = vale_leilao_06.replace(',', '.')
+    vale_leilao_08 = float(vale_leilao_07)
+    print (vale_leilao_08)
 
-
-
-# vale_leilao_08 = float(0)
-
-
-# if soup.findAll('span', {"text-positive-main text-base/6 rtl:force-ltr"}):
-#     #print ("OK")
-#     vale_leilao_01 = soup.findAll('span', {"text-positive-main text-base/6 rtl:force-ltr"})
-#     vale_leilao_02 = vale_leilao_01[1]
-#     vale_leilao_03 = vale_leilao_02.getText()
-#     vale_leilao_04 = vale_leilao_03.replace('(', '')
-#     vale_leilao_05 = vale_leilao_04.replace(')', '')
-#     vale_leilao_06 = vale_leilao_05.replace('%', '')
-#     vale_leilao_07 = vale_leilao_06.replace(',', '.')
-#     vale_leilao_08 = float(vale_leilao_07)
-    
-    
-    
-
-
-# if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
-#     #print ("BUG")
-#     vale_leilao_01 = soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"})
-#     vale_leilao_02 = vale_leilao_01[1]
-#     vale_leilao_03 = vale_leilao_02.getText()
-#     vale_leilao_04 = vale_leilao_03.replace('(', '')
-#     vale_leilao_05 = vale_leilao_04.replace(')', '')
-#     vale_leilao_06 = vale_leilao_05.replace('%', '')
-#     vale_leilao_07 = vale_leilao_06.replace(',', '.')
-#     vale_leilao_08 = float(vale_leilao_07)
+if soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"}):
+    #print ("BUG")
+    vale_leilao_01 = soup.findAll('span', {"text-negative-main text-base/6 rtl:force-ltr"})
+    vale_leilao_02 = vale_leilao_01[1]
+    vale_leilao_03 = vale_leilao_02.getText()
+    vale_leilao_04 = vale_leilao_03.replace('(', '')
+    vale_leilao_05 = vale_leilao_04.replace(')', '')
+    vale_leilao_06 = vale_leilao_05.replace('%', '')
+    vale_leilao_07 = vale_leilao_06.replace(',', '.')
+    vale_leilao_08 = float(vale_leilao_07)
+    print (vale_leilao_08)
     
 
 
