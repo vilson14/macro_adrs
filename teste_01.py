@@ -173,32 +173,15 @@ ouro_var_07 = float(ouro_var_03)
 
 
 #BRENT-------------------------------------------------------------------------------------------------------------------------------------
-url = 'https://br.investing.com/commodities/brent-oil'
-# req = Request(url, headers=head)
-# html1 = urlopen(req)
-# html2 = html1.read()
-# soup = BeautifulSoup(html2, "html.parser")
+brent_df = get_data_ticker ("QA*0")
+brent_preco_01 = brent_df['lastPrice'].iloc[0]
+brent_preco_02 = brent_preco_01.replace(',', '')
+brent_preco_04 = float(brent_preco_02)
 
-request = urllib.request.Request (url, headers=head)
-f = urllib.request.urlopen (request)
-html2 = f.read()
-soup = BeautifulSoup(html2, "html.parser")
-
-brent_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
-brent_preco_02 = brent_preco_01.getText()
-brent_preco_03 = brent_preco_02.replace(',', '.')
-brent_preco_04 = float(brent_preco_03)
-
-
-brent_var_01 = soup.find('span', {"data-test": "instrument-price-change-percent"})
-brent_var_02 = brent_var_01.getText()
-brent_var_03 = brent_var_02.replace('(', '')
-brent_var_04 = brent_var_03.replace(')', '')
-brent_var_05 = brent_var_04.replace('%', '')
-brent_var_06 = brent_var_05.replace(',', '.')
-brent_var_07 = float(brent_var_06)
-
-time.sleep(3)
+brent_var_01 = brent_df['percentChange'].iloc[0]
+brent_var_02 = brent_var_01.replace('%', '')
+brent_var_03 = brent_var_02.replace('+', '')
+brent_var_07 = float(brent_var_03)
 
 
 #SP500-------------------------------------------------------------------------------------------------------------------------------------
