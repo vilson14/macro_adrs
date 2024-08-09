@@ -155,38 +155,22 @@ vix_var_02 = vix_var_01.replace('%', '')
 vix_var_03 = vix_var_02.replace('+', '')
 vix_var_07 = float(vix_var_03)
 
-print(vix_preco_04)
-print(vix_var_07)
+
 
 #OURO-------------------------------------------------------------------------------------------------------------------------------------
-url = 'https://br.investing.com/commodities/gold'
-# req = Request(url, headers=head)
-# html1 = urlopen(req)
-# html2 = html1.read()
-# soup = BeautifulSoup(html2, "html.parser")
+ouro_df = get_data_ticker ("GC*0")
+ouro_preco_01 = ouro_df['lastPrice'].iloc[0]
+ouro_preco_02 = ouro_preco_01.replace(',', '')
+ouro_preco_04 = float(ouro_preco_02)
 
-request = urllib.request.Request (url, headers=head)
-f = urllib.request.urlopen (request)
-html2 = f.read()
-soup = BeautifulSoup(html2, "html.parser")
-
-ouro_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
-ouro_preco_02 = ouro_preco_01.getText()
-ouro_preco_03 = ouro_preco_02.replace('.', '')
-ouro_preco_04 = ouro_preco_03.replace(',', '.')
-ouro_preco_05 = float(ouro_preco_04)
+ouro_var_01 = ouro_df['percentChange'].iloc[0]
+ouro_var_02 = ouro_var_01.replace('%', '')
+ouro_var_03 = ouro_var_02.replace('+', '')
+ouro_var_07 = float(ouro_var_03)
 
 
 
-ouro_var_01 = soup.find('span', {"data-test": "instrument-price-change-percent"})
-ouro_var_02 = ouro_var_01.getText()
-ouro_var_03 = ouro_var_02.replace('(', '')
-ouro_var_04 = ouro_var_03.replace(')', '')
-ouro_var_05 = ouro_var_04.replace('%', '')
-ouro_var_06 = ouro_var_05.replace(',', '.')
-ouro_var_07 = float(ouro_var_06)
 
-time.sleep(3)
 
 #BRENT-------------------------------------------------------------------------------------------------------------------------------------
 url = 'https://br.investing.com/commodities/brent-oil'
