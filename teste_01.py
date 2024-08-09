@@ -161,7 +161,8 @@ vix_var_07 = float(vix_var_03)*-1
 ouro_df = get_data_ticker ("GC*0")
 ouro_preco_01 = ouro_df['lastPrice'].iloc[0]
 ouro_preco_02 = ouro_preco_01.replace(',', '')
-ouro_preco_05 = float(ouro_preco_02)
+ouro_preco_03 = ouro_preco_02.replace('s', '')
+ouro_preco_05 = float(ouro_preco_03)
 
 ouro_var_01 = ouro_df['percentChange'].iloc[0]
 ouro_var_02 = ouro_var_01.replace('%', '')
@@ -176,7 +177,8 @@ ouro_var_07 = float(ouro_var_03)
 brent_df = get_data_ticker ("QA*0")
 brent_preco_01 = brent_df['lastPrice'].iloc[0]
 brent_preco_02 = brent_preco_01.replace(',', '')
-brent_preco_04 = float(brent_preco_02)
+brent_preco_03 = brent_preco_02.replace('s', '')
+brent_preco_04 = float(brent_preco_03)
 
 brent_var_01 = brent_df['percentChange'].iloc[0]
 brent_var_02 = brent_var_01.replace('%', '')
@@ -188,7 +190,8 @@ brent_var_07 = float(brent_var_03)
 sp500_df = get_data_ticker ("ES*0")
 sp500_preco_01 = sp500_df['lastPrice'].iloc[0]
 sp500_preco_02 = sp500_preco_01.replace(',', '')
-sp500_preco_05 = float(sp500_preco_02)
+sp500_preco_03 = sp500_preco_02.replace('s', '')
+sp500_preco_05 = float(sp500_preco_03)
 
 sp500_var_01 = sp500_df['percentChange'].iloc[0]
 sp500_var_02 = sp500_var_01.replace('%', '')
@@ -202,7 +205,8 @@ sp500_var_07 = float(sp500_var_03)
 wti_df = get_data_ticker ("CL*0")
 wti_preco_01 = wti_df['lastPrice'].iloc[0]
 wti_preco_02 = wti_preco_01.replace(',', '')
-wti_preco_04 = float(wti_preco_02)
+wti_preco_03 = wti_preco_02.replace('s', '')
+wti_preco_04 = float(wti_preco_03)
 
 wti_var_01 = wti_df['percentChange'].iloc[0]
 wti_var_02 = wti_var_01.replace('%', '')
@@ -233,7 +237,8 @@ minerio_dalian_var_04 = 0
 minerio_cme_df = get_data_ticker ("CL*0")
 minerio_cme_preco_01 = minerio_cme_df['lastPrice'].iloc[0]
 minerio_cme_preco_02 = minerio_cme_preco_01.replace(',', '')
-minerio_cme_preco_04 = float(minerio_cme_preco_02)
+minerio_cme_preco_03 = minerio_cme_preco_02.replace('s', '')
+minerio_cme_preco_04 = float(minerio_cme_preco_03)
 
 minerio_cme_var_01 = minerio_cme_df['percentChange'].iloc[0]
 minerio_cme_var_02 = minerio_cme_var_01.replace('%', '')
@@ -247,7 +252,8 @@ minerio_cme_var_07 = float(minerio_cme_var_03)
 ewz_df = get_data_ticker ("EWZ")
 ewz_preco_01 = ewz_df['lastPrice'].iloc[0]
 ewz_preco_02 = ewz_preco_01.replace(',', '')
-ewz_preco_04 = float(ewz_preco_02)
+ewz_preco_03 = ewz_preco_02.replace('s', '')
+ewz_preco_04 = float(ewz_preco_03)
 
 ewz_var_01 = ewz_df['percentChange'].iloc[0]
 ewz_var_02 = ewz_var_01.replace('%', '')
