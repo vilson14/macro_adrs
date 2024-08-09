@@ -199,29 +199,15 @@ sp500_var_07 = float(sp500_var_03)
 
 
 #WTI-------------------------------------------------------------------------------------------------------------------------------------
-url = 'https://br.investing.com/commodities/crude-oil'
-# req = Request(url, headers=head)
-# html1 = urlopen(req)
-# html2 = html1.read()
-# soup = BeautifulSoup(html2, "html.parser")
+wti_df = get_data_ticker ("CL*0")
+wti_preco_01 = wti_df['lastPrice'].iloc[0]
+wti_preco_02 = wti_preco_01.replace(',', '')
+wti_preco_04 = float(wti_preco_02)
 
-request = urllib.request.Request (url, headers=head)
-f = urllib.request.urlopen (request)
-html2 = f.read()
-soup = BeautifulSoup(html2, "html.parser")
-
-wti_preco_01 = soup.find('div', {"data-test": "instrument-price-last"})
-wti_preco_02 = wti_preco_01.getText()
-wti_preco_03 = wti_preco_02.replace(',', '.')
-wti_preco_04 = float(wti_preco_03)
-
-wti_var_01 = soup.find('span', {"data-test": "instrument-price-change-percent"})
-wti_var_02 = wti_var_01.getText()
-wti_var_03 = wti_var_02.replace('(', '')
-wti_var_04 = wti_var_03.replace(')', '')
-wti_var_05 = wti_var_04.replace('%', '')
-wti_var_06 = wti_var_05.replace(',', '.')
-wti_var_07 = float(wti_var_06)
+wti_var_01 = wti_df['percentChange'].iloc[0]
+wti_var_02 = wti_var_01.replace('%', '')
+wti_var_03 = wti_var_02.replace('+', '')
+wti_var_07 = float(wti_var_03)
 
 
 
