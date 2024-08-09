@@ -153,7 +153,7 @@ vix_preco_04 = float(vix_preco_01)
 vix_var_01 = vix_df['percentChange'].iloc[0]
 vix_var_02 = vix_var_01.replace('%', '')
 vix_var_03 = vix_var_02.replace('+', '')
-vix_var_07 = float(vix_var_03)
+vix_var_07 = float(vix_var_03)*-1
 
 
 
