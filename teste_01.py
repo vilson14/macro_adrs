@@ -161,7 +161,7 @@ vix_var_07 = float(vix_var_03)
 ouro_df = get_data_ticker ("GC*0")
 ouro_preco_01 = ouro_df['lastPrice'].iloc[0]
 ouro_preco_02 = ouro_preco_01.replace(',', '')
-ouro_preco_04 = float(ouro_preco_02)
+ouro_preco_05 = float(ouro_preco_02)
 
 ouro_var_01 = ouro_df['percentChange'].iloc[0]
 ouro_var_02 = ouro_var_01.replace('%', '')
