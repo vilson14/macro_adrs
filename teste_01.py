@@ -578,12 +578,12 @@ df_ewz["Color"] = np.where(df_ewz["Variação"]<0, 'red', 'green')
 
 
 #VALE-------------------------------------------------------------------------------------------------
-# df_vale = pd.DataFrame({
-#      'Variação':[vale_var_07,vale_leilao_08], 
-#      'Leilão':['Variação','Leilão']
-# })
+df_vale = pd.DataFrame({
+     'Variação':[vale_var_07,vale_leilao_08], 
+     'Leilão':['Variação','Leilão']
+})
 
-# df_vale["Color"] = np.where(df_vale["Variação"]<0, 'red', 'green')
+df_vale["Color"] = np.where(df_vale["Variação"]<0, 'red', 'green')
 
 
 # #PETRO-------------------------------------------------------------------------------------------------
@@ -686,9 +686,9 @@ fig.add_annotation(x=0, y=((df_ewz['Variação']/2).iloc[0]),text=str (ewz_preco
 
 
 #VALE
-# fig.add_trace(go.Bar(name='Net2', x=df_vale['Leilão'], y=df_vale['Variação'], marker_color=df_vale['Color'], text= [str(i1)+' %' for i1 in df_vale['Variação']], textposition='inside', width=0.5, marker_line_color='black', marker_line_width=1),row=4, col=1 )
-# fig.add_shape(type='line', x0=-0.5, y0=0, x1=1.5, y1=0, line=dict( color='black', width=5,),row=4, col=1)
-# fig.add_annotation(x=0, y=((df_vale['Variação']/2).iloc[0]),text=str (vale_preco_04),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=4, col=1)
+fig.add_trace(go.Bar(name='Net2', x=df_vale['Leilão'], y=df_vale['Variação'], marker_color=df_vale['Color'], text= [str(i1)+' %' for i1 in df_vale['Variação']], textposition='inside', width=0.5, marker_line_color='black', marker_line_width=1),row=4, col=1 )
+fig.add_shape(type='line', x0=-0.5, y0=0, x1=1.5, y1=0, line=dict( color='black', width=5,),row=4, col=1)
+fig.add_annotation(x=0, y=((df_vale['Variação']/2).iloc[0]),text=str (vale_preco_04),showarrow=False,yshift=5, font=dict(family="Arial Black",size=16,color="#ffffff"), opacity=0.5, row=4, col=1)
 
 
 #PETRO
